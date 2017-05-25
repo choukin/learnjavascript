@@ -4,7 +4,7 @@
   * 1.栈是一种遵循后进先出（LIFO）原则的有序集合
   * 2.新添加和待删除的元素都在栈的末尾，称作栈顶
   * 3.另一端叫做栈底
-  * 4.在栈里新元素都靠近栈顶，就元素都靠近栈底
+  * 4.在栈里新元素都靠近栈顶，旧元素都靠近栈底
   * @return {type}  description
   */
 function stack (){
@@ -61,7 +61,7 @@ function stack (){
   /**
    * anonymous function - 查看栈内元素
    *
-   * @return {undefined}     
+   * @return {undefined}
    */
   this.print = function () {
     conosle.log(items.toString()
