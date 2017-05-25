@@ -2,12 +2,17 @@
   * Stack - 使用Array 模拟栈
   * 栈的特点：
   * 1.栈是一种遵循后进先出（LIFO）原则的有序集合
-  * 2.新添加和待删除的元素都在栈的末尾，称作栈顶
-  * 3.另一端叫做栈底
-  * 4.在栈里新元素都靠近栈顶，旧元素都靠近栈底
+  * 2.新添加和待删除的元素都在栈的末尾，称作栈顶,另一端叫做栈底
+  * 3.在栈里新元素都靠近栈顶，旧元素都靠近栈底
   * @return {type}  description
   */
-function stack (){
+const Stack = function  (type){
+
+  this.type = type
+
+  /**
+   * 通过数组保存栈内元素
+   */
   var items = []
   /**
   * 添加一个新元素到到栈顶
@@ -64,6 +69,11 @@ function stack (){
    * @return {undefined}
    */
   this.print = function () {
-    conosle.log(items.toString()
+    console.log(items.join())
   }
+
+  this.toString = function(){
+    return items.toString();
+};
 }
+// module.exports = Stack
