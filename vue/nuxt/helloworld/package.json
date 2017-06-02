@@ -12,7 +12,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.1",
+    "bulma": "^0.4.2",
+    "hover.css": "^2.2.0",
     "lru-cache": "^4.0.2",
-    "nuxt": "^1.0.0-alpha2"
+    "node-sass": "^4.5.3",
+    "nuxt": "^1.0.0-alpha2",
+    "sass-loader": "^6.0.5"
   }
 }

@@ -6,9 +6,11 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 
-const _f74a1d7a = () => import('/work/learn/vue/nuxt/helloworld/pages/index.vue' /* webpackChunkName: "pages/index" */)
+const _4e24c8e5 = () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/pages/index.vue' /* webpackChunkName: "pages/index" */)
 
-const _64a3167e = () => import('/work/learn/vue/nuxt/helloworld/pages/about.vue' /* webpackChunkName: "pages/about" */)
+const _2e6cee20 = () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/pages/about.vue' /* webpackChunkName: "pages/about" */)
+
+const _ac7c2974 = () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/pages/users/_id.vue' /* webpackChunkName: "pages/users-id" */)
 
 
 
@@ -46,13 +48,18 @@ export function createRouter () {
     routes: [
   		{
 			path: "/",
-			component: _f74a1d7a,
+			component: _4e24c8e5,
 			name: "index"
 		},
 		{
 			path: "/about",
-			component: _64a3167e,
+			component: _2e6cee20,
 			name: "about"
+		},
+		{
+			path: "/users/:id?",
+			component: _ac7c2974,
+			name: "users-id"
 		}
     ]
   })

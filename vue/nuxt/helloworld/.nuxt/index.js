@@ -6,7 +6,7 @@ import { createRouter } from './router.js'
 
 import NuxtChild from './components/nuxt-child.js'
 import NuxtLink from './components/nuxt-link.js'
-import NuxtError from './components/nuxt-error.vue'
+import NuxtError from '/work/learn/learnjavascript/vue/nuxt/helloworld/layouts/error.vue'
 import Nuxt from './components/nuxt.vue'
 import App from './App.vue'
 

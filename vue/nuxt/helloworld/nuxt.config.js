@@ -1,6 +1,13 @@
+const {join} = require('path')
 module.exports = {
 	loading: 'components/loading.vue',
+	css:[
+	  'hover.css/css/hover-min.css',
+	  'bulma/bulma.sass',
+	  join(__dirname,'css/main.css')
+	],
 	build: {
+		extractCSS: true,
 		analyze: true,
 		ssr: {
 			cache: require('lru-cache')({

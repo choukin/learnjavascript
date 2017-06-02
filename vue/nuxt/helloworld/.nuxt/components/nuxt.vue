@@ -6,7 +6,7 @@
 <script>
 import Vue from 'vue'
 import NuxtChild from './nuxt-child'
-import NuxtError from './nuxt-error.vue'
+import NuxtError from '/work/learn/learnjavascript/vue/nuxt/helloworld/layouts/error.vue'
 
 export default {
   name: 'nuxt',

@@ -6,12 +6,20 @@
 </template>
 
 <script>
-import NuxtLoading from '/work/learn/vue/nuxt/helloworld/components/loading.vue'
+import NuxtLoading from '/work/learn/learnjavascript/vue/nuxt/helloworld/components/loading.vue'
+
+import 'hover.css/css/hover-min.css'
+
+import 'bulma/bulma.sass'
+
+import '/work/learn/learnjavascript/vue/nuxt/helloworld/css/main.css'
 
 
 let layouts = {
 
-  "_default": () => import('/work/learn/vue/nuxt/helloworld/node_modules/nuxt/dist/app/layouts/default.vue'  /* webpackChunkName: "layouts/default" */)
+  "_dark": () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/layouts/dark.vue'  /* webpackChunkName: "layouts/dark" */),
+
+  "_default": () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/layouts/default.vue'  /* webpackChunkName: "layouts/default" */)
 
 }
 
