@@ -9,7 +9,8 @@
 <script>
 import TwitterHeadCard from '~components/twitter-head-card.vue'
 	export default{
-		layout:'dark',
+		transition:'bounce',
+		layout:'default',
 		head: {
  			title:'About Page',
  			meta:[

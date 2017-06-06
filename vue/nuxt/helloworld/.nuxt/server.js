@@ -17,14 +17,14 @@ const isDev = true
 // Since data fetching is async, this function is expected to
 // return a Promise that resolves to the app instance.
 export default async (context) => {
-  const { app, router } = await createApp(context)
+  const { app, router, store } = await createApp(context)
   const _app = new Vue(app)
   // Add store to the context
-  
+  context.store = store
   // Add route to the context
   context.route = router.currentRoute
   // Nuxt object
-  context.nuxt = { layout: 'default', data: [], error: null, serverRendered: true }
+  context.nuxt = { layout: 'default', data: [], error: null, state: null, serverRendered: true }
   // create context.next for simulate next() of beforeEach() when wanted to redirect
   context.redirected = false
   context.next = function (opts) {
@@ -65,11 +65,12 @@ export default async (context) => {
   }
   // nuxtServerInit
   
-    let promise = Promise.resolve()
+    let promise = (store._actions && store._actions.nuxtServerInit ? store.dispatch('nuxtServerInit', omit(getContext(context, app), 'redirect', 'error')) : null)
+    if (!promise || (!(promise instanceof Promise) && (typeof promise.then !== 'function'))) promise = Promise.resolve()
   
   await promise
   // Call global middleware (nuxt.config.js)
-  let midd = []
+  let midd = ["visits","user-agent"]
   midd = midd.map((name) => {
     if (typeof middleware[name] !== 'function') {
       context.nuxt.error = context.error({ statusCode: 500, message: 'Unknown middleware ' + name })
@@ -112,7 +113,7 @@ export default async (context) => {
     if (typeof Component.options.validate !== 'function') return
     isValid = Component.options.validate({
       params: context.route.params || {},
-      query: context.route.query  || {}
+      query: context.route.query  || {}, store: ctx.store
     })
   })
   // If .validate() returned false
@@ -154,8 +155,8 @@ export default async (context) => {
   if (_app.$options._nuxt.err) {
     context.nuxt.error = _app.$options._nuxt.err
   }
-  
-  
+  // Add the state from the vuex store
+  context.nuxt.state = store.state
   // If no error, return main app
   if (!context.nuxt.error) {
     return _app
@@ -170,6 +171,6 @@ export default async (context) => {
     //   error = { statusCode: 500, message: error }
     // }
     // context.nuxt.error = context.error(error)
-    // 
+    // context.nuxt.state = store.state
     // return _app
 }

@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import Meta from 'vue-meta'
 import { createRouter } from './router.js'
-
+import { createStore } from './store.js'
 import NuxtChild from './components/nuxt-child.js'
 import NuxtLink from './components/nuxt-link.js'
 import NuxtError from '/work/learn/learnjavascript/vue/nuxt/helloworld/layouts/error.vue'
@@ -34,6 +34,8 @@ const defaultTransition = {"name":"page","mode":"out-in"}
 
 async function createApp (ssrContext) {
   
+  const store = createStore()
+  
   const router = createRouter()
 
   if (process.server && ssrContext && ssrContext.url) {
@@ -43,6 +45,11 @@ async function createApp (ssrContext) {
   }
 
   if (process.browser) {
+    
+    // Replace store state before calling plugins
+    if (window.__NUXT__ && window.__NUXT__.state) {
+      store.replaceState(window.__NUXT__.state)
+    }
     
     // window.onNuxtReady(() => console.log('Ready')) hook
     // Useful for jsdom testing or plugins (https://github.com/tmpvar/jsdom#dealing-with-asynchronous-script-loading)
@@ -57,7 +64,7 @@ async function createApp (ssrContext) {
   // making them available everywhere as `this.$router` and `this.$store`.
   let app = {
     router,
-    
+    store,
     _nuxt: {
       defaultTransition: defaultTransition,
       transitions: [ defaultTransition ],
@@ -97,7 +104,7 @@ async function createApp (ssrContext) {
     isServer: !!ssrContext,
     isClient: !ssrContext,
     route: router.currentRoute,
-    
+    store,
     req: ssrContext ? ssrContext.req : undefined,
     res: ssrContext ? ssrContext.res : undefined,
   }, app)
@@ -106,8 +113,16 @@ async function createApp (ssrContext) {
 
   // Inject external plugins
   
+  if (process.browser) {
+    let plugin0 = require('~plugins/vue-notifications.js')
+    plugin0 = plugin0.default || plugin0
+    if (typeof plugin0 === 'function') {
+      await plugin0(ctx)
+    }
+  }
+  
 
-  return { app, router }
+  return { app, router, store }
 }
 
 export { createApp, NuxtError }

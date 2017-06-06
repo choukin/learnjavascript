@@ -28,23 +28,6 @@ export default {
     this.error = this.$root.error
   },
   
-  mounted () {
-    if (this.$root.$loading && this.$root.$loading.start) {
-      this.$loading = this.$root.$loading
-    }
-  },
-  watch: {
-    'nuxt.err': 'errorChanged'
-  },
-  methods: {
-    errorChanged () {
-      if (this.nuxt.err && this.$loading) {
-        if (this.$loading.fail) this.$loading.fail()
-        if (this.$loading.finish) this.$loading.finish()
-      }
-    }
-  },
-  
   components: {
     NuxtChild,
     NuxtError

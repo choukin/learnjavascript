@@ -11,7 +11,7 @@ let _lastComponentsFiles = []
 
 let app
 let router
-
+let store
 
 function mapTransitions(Components, to, from) {
   return Components.map((Component) => {
@@ -43,7 +43,7 @@ function loadAsyncComponents (to, from, next) {
   const toPath = to.fullPath.split('#')[0]
   this._hashChanged = (fromPath === toPath)
   if (!this._hashChanged) {
-    this.$loading.start && this.$loading.start()
+    
   }
   Promise.all(resolveComponents)
   .then(() => next())
@@ -56,7 +56,7 @@ function loadAsyncComponents (to, from, next) {
 
 function callMiddleware (Components, context, layout) {
   // if layout is undefined, only call global middleware
-  let midd = []
+  let midd = ["visits","user-agent"]
   let unknownMiddleware = false
   if (typeof layout !== 'undefined') {
     midd = [] // exclude global middleware if layout defined (already called before)
@@ -85,12 +85,12 @@ async function render (to, from, next) {
   let layout
   let nextCalled = false
   const _next = function (path) {
-    this.$loading.finish && this.$loading.finish()
+    
     if (nextCalled) return
     nextCalled = true
     next(path)
   }
-  let context = getContext({ to, isClient: true, next: _next.bind(this), error: this.error.bind(this) }, app)
+  let context = getContext({ to, store, isClient: true, next: _next.bind(this), error: this.error.bind(this) }, app)
   let Components = getMatchedComponents(to)
   this._context = context
   this._dateLastError = this.$options._nuxt.dateErr
@@ -131,7 +131,7 @@ async function render (to, from, next) {
       if (typeof Component.options.validate !== 'function') return
       isValid = Component.options.validate({
         params: to.params || {},
-        query : to.query  || {}
+        query : to.query  || {}, store: context.store
       })
     })
     if (!isValid) {
@@ -150,20 +150,20 @@ async function render (to, from, next) {
         var promise = promisify(Component.options.asyncData, context)
         promise.then((asyncDataResult) => {
           applyAsyncData(Component, asyncDataResult)
-          this.$loading.increase && this.$loading.increase(30)
+          
         })
         promises.push(promise)
       }
       if (Component.options.fetch) {
         var p = Component.options.fetch(context)
         if (!p || (!(p instanceof Promise) && (typeof p.then !== 'function'))) { p = Promise.resolve(p) }
-        p.then(() => this.$loading.increase && this.$loading.increase(30))
+        
         promises.push(p)
       }
       return Promise.all(promises)
     }))
     _lastPaths = Components.map((Component, i) => compile(to.matched[i].path)(to.params))
-    this.$loading.finish && this.$loading.finish()
+    
     // If not redirected
     if (!nextCalled) {
       next()
@@ -267,11 +267,11 @@ function addHotReload ($component, depth) {
     this.error()
     let promises = []
     const next = function (path) {
-      this.$loading.finish && this.$loading.finish()
+      
       router.push(path)
     }
-    let context = getContext({ route: router.currentRoute, isClient: true, next: next.bind(this), error: this.error }, app)
-    this.$loading.start && this.$loading.start()
+    let context = getContext({ route: router.currentRoute, store, isClient: true, next: next.bind(this), error: this.error }, app)
+    
     callMiddleware.call(this, Components, context)
     .then(() => {
       // If layout changed
@@ -296,19 +296,19 @@ function addHotReload ($component, depth) {
       let pAsyncData = promisify(Component.options.asyncData || noopData, context)
       pAsyncData.then((asyncDataResult) => {
         applyAsyncData(Component, asyncDataResult)
-        this.$loading.increase && this.$loading.increase(30)
+        
       })
       promises.push(pAsyncData)
       // Call fetch()
       Component.options.fetch = Component.options.fetch || noopFetch
       let pFetch = Component.options.fetch(context)
       if (!pFetch || (!(pFetch instanceof Promise) && (typeof pFetch.then !== 'function'))) { pFetch = Promise.resolve(pFetch) }
-      pFetch.then(() => this.$loading.increase && this.$loading.increase(30))
+      
       promises.push(pFetch)
       return Promise.all(promises)
     })
     .then(() => {
-      this.$loading.finish && this.$loading.finish()
+      
       _forceUpdate()
       setTimeout(() => hotReloadAPI(this), 100)
     })
@@ -359,7 +359,7 @@ createApp()
 .then(async (__app) => {
   app = __app.app
   router = __app.router
-  
+  store = __app.store
   const Components = await Promise.all(resolveComponents(router))
   const _app = new Vue(app)
   const layout = NUXT.layout || 'default'

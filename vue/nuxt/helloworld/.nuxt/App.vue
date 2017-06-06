@@ -1,16 +1,12 @@
 <template>
   <div id="__nuxt">
-    <nuxt-loading ref="loading"></nuxt-loading>
+    
     <component v-if="layout" :is="layout"></component>
   </div>
 </template>
 
 <script>
-import NuxtLoading from '/work/learn/learnjavascript/vue/nuxt/helloworld/components/loading.vue'
 
-import 'hover.css/css/hover-min.css'
-
-import 'bulma/bulma.sass'
 
 import '/work/learn/learnjavascript/vue/nuxt/helloworld/css/main.css'
 
@@ -29,11 +25,6 @@ export default {
     layout: null,
     layoutName: ''
   }),
-  
-  mounted () {
-    this.$loading = this.$refs.loading
-    this.$nuxt.$loading = this.$loading
-  },
   
   methods: {
     setLayout (layout) {
@@ -63,7 +54,7 @@ export default {
     }
   },
   components: {
-    NuxtLoading
+    
   }
 }
 </script>

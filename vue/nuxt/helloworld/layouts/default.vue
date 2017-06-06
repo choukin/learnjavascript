@@ -2,13 +2,20 @@
 	<div>
 	<img src="logo.png" alt="">
 		<nuxt/>
+		<visits/>
 	</div>
 </template>
-<style>
+<script>
+	import Visits from '~components/Visits'
+	export default {
+		components:{Visits}
+	}
+</script>
+<style scoped>
 	img{
 		position: fixed;
-		top:20px;
-		right:20px;
+		top:300px;
+		left:20px;
 		z-index: 1000;
 	}
 </style>

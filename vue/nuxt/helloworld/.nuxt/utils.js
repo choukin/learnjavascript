@@ -59,7 +59,7 @@ export function getContext (context, app) {
     isClient: !!context.isClient,
     isDev: true,
     app: app,
-    
+    store: context.store,
     route: (context.to ? context.to : context.route),
     payload : context.payload,
     error: context.error,

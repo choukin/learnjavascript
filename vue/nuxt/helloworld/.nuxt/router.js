@@ -8,9 +8,13 @@ Vue.use(Router)
 
 const _4e24c8e5 = () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/pages/index.vue' /* webpackChunkName: "pages/index" */)
 
+const _3c1d3d30 = () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/pages/userss.vue' /* webpackChunkName: "pages/userss" */)
+
 const _2e6cee20 = () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/pages/about.vue' /* webpackChunkName: "pages/about" */)
 
 const _ac7c2974 = () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/pages/users/_id.vue' /* webpackChunkName: "pages/users-id" */)
+
+const _4c6e279d = () => import('/work/learn/learnjavascript/vue/nuxt/helloworld/pages/_slug.vue' /* webpackChunkName: "pages/slug" */)
 
 
 
@@ -52,6 +56,11 @@ export function createRouter () {
 			name: "index"
 		},
 		{
+			path: "/userss",
+			component: _3c1d3d30,
+			name: "userss"
+		},
+		{
 			path: "/about",
 			component: _2e6cee20,
 			name: "about"
@@ -60,6 +69,11 @@ export function createRouter () {
 			path: "/users/:id?",
 			component: _ac7c2974,
 			name: "users-id"
+		},
+		{
+			path: "/:slug",
+			component: _4c6e279d,
+			name: "slug"
 		}
     ]
   })

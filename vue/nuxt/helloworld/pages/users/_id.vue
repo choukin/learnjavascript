@@ -13,6 +13,12 @@
 		validate ({params}){
 			return !isNaN(+params.id)
 		},
+		head: {
+			title: 'Home page',
+			meta:[
+				{hid:'description', name:'description', content: 'HOme page description'}
+			]
+		},
 		asyncData ({params,error}){
 			return axios.get(`https://jsonplaceholder.typicode.com/users/${+params.id}`)
 			.then((res)=> res.data)
