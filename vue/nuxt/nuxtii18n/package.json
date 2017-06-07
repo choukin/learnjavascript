@@ -1,0 +1,21 @@
+{
+  "name": "nuxtii18n",
+  "version": "1.0.0",
+  "description": "i18n",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "ava --serial --verbose"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ava": "^0.19.1",
+    "jsdom": "^11.0.0",
+    "nuxt": "^1.0.0-alpha.4",
+    "vue-i18n": "^7.0.1"
+  }
+}
