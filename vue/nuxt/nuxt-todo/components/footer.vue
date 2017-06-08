@@ -1,21 +1,42 @@
 <template>
 	<!-- This footer should hidden by default and shown when there are todos -->
-			<footer class="footer">
+			<footer class="footer" v-if="todos.length">
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>0</strong> item left</span>
+				<span class="todo-count"><strong>{{remaining}}</strong> 
+				item<span v-if="remaining > 1">s</span> left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
-						<a class="selected" href="#/">All</a>
+						<nuxt-link  to="/" exact>All</nuxt-link>
 					</li>
 					<li>
-						<a href="#/active">Active</a>
+						<nuxt-link to="/active">Active</nuxt-link>
 					</li>
 					<li>
-						<a href="#/completed">Completed</a>
+						<nuxt-link to="/completed">Completed</nuxt-link>
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
-				<button class="clear-completed">Clear completed</button>
+				<button class="clear-completed" @click="removeCompleted" v-if="todos.length > remaining">Clear completed</button>
 			</footer>
 </template>
+<script>
+	export default {
+		computed: {
+			todos(){
+				return this.$store.getters.allTodos
+			},
+			actives () {
+				return this.$store.getters.activeTodos
+			},
+			remaining () {
+				return this.$store.getters.activeTodos.length
+			}
+		},
+		methods: {
+			removeCompleted() {
+				this.$store.dispatch('setTodos', this.actives)
+			}
+		}
+	}
+</script>
