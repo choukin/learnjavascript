@@ -128,7 +128,7 @@ Context 对象还提供了关于其 request 和 response 上方法的快捷方�
 
 ## 文档
 
-- [使用指南](https://github.com/koajs/koa/blob/master/docs/guide.md)
+- [使用指南](./docs/guide.md)
 - [错误处理](https://github.com/koajs/koa/blob/master/docs/error-handling.md)
 - [想使用koa 的 express 用户](https://github.com/koajs/koa/blob/master/docs/koa-vs-express.md)
 - [常见问题](https://github.com/koajs/koa/blob/master/docs/faq.md)
