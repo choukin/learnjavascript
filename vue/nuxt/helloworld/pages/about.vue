@@ -11,6 +11,7 @@ import TwitterHeadCard from '~components/twitter-head-card.vue'
 	export default{
 		transition:'bounce',
 		layout:'default',
+		middleware :'visits',
 		head: {
  			title:'About Page',
  			meta:[

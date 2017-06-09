@@ -2,7 +2,7 @@ const {join} = require('path')
 const axios = require('axios')
 module.exports = {
 	router: {
-      middleware :['visits','user-agent']
+      middleware :['user-agent']
 	},
 	loading: false,//'components/loading.vue',
 	css:[
