@@ -180,7 +180,7 @@ $ make test
  - [G+ 社区](https://plus.google.com/communities/101845768320796750641)
  - [Reddit 社区](https://www.reddit.com/r/koajs/)
  - [邮件列表](https://groups.google.com/forum/#!forum/koajs)
- - [中文文档](https://github.com/guo-yu/koa-guid)
+ - [中文文档](https://github.com/guo-yu/koa-guide)
  - freenode 上的[koajs](https://webchat.freenode.net/?channels=#koajs)
 
  ## License
