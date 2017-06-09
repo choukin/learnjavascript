@@ -113,7 +113,7 @@ Koa 中间件是简单的函数，返回含有签名(ctx,next)的中间件函数
   function loggers (format) {
     return async function logger(ctx, next){
 
-}
+    }
   }
 ```
 ### 通过 koa-compose 合并多个中间件
@@ -127,21 +127,21 @@ Koa 中间件是简单的函数，返回含有签名(ctx,next)的中间件函数
     }else{
      await next()
     }
- }
+  }
 
   async function backwards(ctx, next){
-  if('/backwards' == ctx.path){
-    ctx.body = 'sdrawkcab'
-  }else{
-    await next();
-  }
+	  if('/backwards' == ctx.path){
+	    ctx.body = 'sdrawkcab'
+	  }else{
+	    await next();
+	  }
   }
   async function pi(ctx, next){
-   if('/pi' == ctx.path){
-   ctx.body = String(Math.PI)
-   }else{
-    await next()
-   }
+	   if('/pi' == ctx.path){
+	   ctx.body = String(Math.PI)
+	   }else{
+	    await next()
+	   }
   }
 
   const all = compose([reandom,backwards,pi])
