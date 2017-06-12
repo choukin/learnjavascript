@@ -201,7 +201,7 @@ Koa 中间件是简单的函数，返回含有签名(ctx,next)的中间件函数
   })
 ``` 
 ## 调试 Koa
-Koa 以及许多与其搭配使用的库，支持在调试的时设置 DEBUG 环境变量，它提供简单的条件日志记录。
+Koa 以及许多与其搭配使用的库，支持在调试的时设置由 [debug](https://github.com/visionmedia/debug)提供的 DEBUG 环境变量，_debug_ 提供简单的条件日志记录。
 例如，要查看所有koa特定的调试信息，只需要通过 DEBUG=koa* ，并且在启动时，除了其他信息外您将看到所使用的中间件列表。
 ```shell
 $ DEBUG=koa* node --harmony examples/simple

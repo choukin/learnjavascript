@@ -1,0 +1,22 @@
+{
+  "name": "koaexam",
+  "version": "1.0.0",
+  "description": "<img src=\"https://dl.dropboxusercontent.com/u/6396913/koa/logo.png\" alt=\"koa middleware framework for nodejs\" width=\"255px\" />",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "koa": "^2.2.0",
+    "koa-body": "^2.1.0",
+    "koa-ejs": "^4.0.0",
+    "koa-router": "^7.2.0",
+    "koa-session": "^5.1.0"
+  }
+}
